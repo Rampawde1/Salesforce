@@ -1,0 +1,135 @@
+VF Example 21st July
+----------------------------------------------
+<apex:page standardController="Solution" showHeader="true" sidebar="true" title="Salesforce Ram" >
+  <apex:pageBlock title="My First Page Block">
+      <apex:pageBlockSection title="Part01">
+          This is Ram 
+          <p>
+              From Part01 Page Block Section
+          </p>
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockSection title="Part02">
+           This is Ram 
+          <p>
+              From Part02 Page Block Section
+          </p>
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockSection title="Part03">
+           This is Ram 
+          <p>
+              From Part03 Page Block Section
+          </p>
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+   <apex:pageBlock title="Second Page Block">
+      Hi This Ram From Second Page Block...
+    </apex:pageBlock>
+    
+    <apex:pageBlock title="Third Page Block">
+      Hi This Ram From Third Page Block...
+    </apex:pageBlock>
+</apex:page>
+-------------------------------------------------------------------------------------------------
+
+VF Example 21st July
+----------------------------
+<apex:page title="Account Info" standardController="Account" >
+    <apex:pageBlock title="Account Information">
+        <apex:pageBlockSection title="General Information">
+            <apex:outputField value="{!Account.Name}"/>
+            <apex:outputField value="{!Account.Phone}"/>
+            <apex:outputField value="{!Account.fax}"/>
+            <apex:outputField value="{!Account.Industry}"/>
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="Billing Information">
+             <apex:outputField value="{!Account.BillingCity}"/>
+             <apex:outputField value="{!Account.BillingState}"/>
+             <apex:outputField value="{!Account.BillingCountry}"/>
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="Other Information">
+             <apex:outputField value="{!Account.Type}"/>
+             <apex:outputField value="{!Account.Rating}"/>
+             <apex:outputField value="{!Account.Website}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+</apex:page>
+---------------------------------------------------------------------------------------------
+VF Example 26th July
+----------------------------
+<apex:page standardController="Account" >
+    <apex:form >
+        <apex:pageBlock title="Create Account">
+            <apex:pageBlockSection title="General Information">
+                <apex:inputField value="{!Account.Name}"/>
+                <apex:inputField value="{!Account.Fax}"/>
+                <apex:inputField value="{!Account.Phone}"/>
+                <apex:inputField value="{!Account.Industry}"/>
+                <apex:inputField value="{!Account.Website}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Billing Information">
+                <apex:inputField value="{!Account.BillingCity}"/>
+                <apex:inputField value="{!Account.BillingState}"/>
+                <apex:commandButton value="Save Account" action="{!Save}"/>
+                <apex:commandLink value="Save For Link" action="{!save}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Custom Fields">
+                <apex:selectRadio label="Select One From Options">
+                    <apex:selectOption itemLabel="Apple" itemValue="A"></apex:selectOption>
+                    <apex:selectOption itemLabel="Banana" itemValue="B"></apex:selectOption>
+                    <apex:selectOption itemLabel="Strawberry" itemValue="C"></apex:selectOption>
+                </apex:selectRadio>
+                
+                <apex:selectList label="Select One From the List">
+                    <apex:selectOption itemLabel="Dell" itemValue="D"></apex:selectOption>
+                    <apex:selectOption itemLabel="HP" itemValue="H"></apex:selectOption>
+                    <apex:selectOption itemLabel="Lenovo" itemValue="L"></apex:selectOption>
+                    <apex:selectOption itemLabel="Sony" itemValue="s"></apex:selectOption>
+                    <apex:selectOption itemLabel="Asus" itemValue="A"></apex:selectOption>
+                </apex:selectList>
+                <apex:selectCheckboxes label="Select Multiple Options">
+                     <apex:selectOption itemLabel="Dell" itemValue="D"></apex:selectOption>
+                    <apex:selectOption itemLabel="HP" itemValue="H"></apex:selectOption>
+                    <apex:selectOption itemLabel="Lenovo" itemValue="L"></apex:selectOption>
+                    <apex:selectOption itemLabel="Sony" itemValue="s"></apex:selectOption>
+                    <apex:selectOption itemLabel="Asus" itemValue="A"></apex:selectOption>
+                </apex:selectCheckboxes>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+---------------------------------------------------------------------------------------------------------------------------
+VF Example 27th July Related List, Customized Table i.e PageBlockTable
+----------------------------------------------------------------------------
+<apex:page standardController="Account">
+    <apex:pageBlock title="Accounts Related Data In Related List">
+        <apex:pageBlockSection title="Related Oportunity">
+            <apex:relatedList list="Opportunities"/>
+            <apex:relatedList list="Contacts"/>
+            <apex:relatedList list="Cases"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="Page Block Table">
+    <apex:pageBlockSection title="Related Customized Table">
+        <apex:pageBlockTable value="{!Account.Opportunities}" var="AO">
+         <apex:column value="{!AO.Name}"/>
+         <apex:column value="{!AO.StageName}"/>
+         <apex:column value="{!AO.Amount}"/>
+         <apex:column value="{!AO.Probability}"/>
+        </apex:pageBlockTable>
+        
+         <apex:pageBlockTable value="{!Account.Cases}" var="CA">
+         <apex:column value="{!CA.Subject}"/>
+         <apex:column value="{!CA.Origin}"/>
+         <apex:column value="{!CA.ClosedDate}"/>
+        </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+</apex:page>
