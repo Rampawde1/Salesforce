@@ -1,0 +1,27 @@
+//Apex Example for Rainy Season/Winter Season/Summer Season
+--------------------------------------------------------------------
+Integer Month = 5;
+If(Month <= 12)
+{
+If(Month >= 11)
+{
+    System.debug('Winter Season');
+}
+Else If(Month >= 3)
+{
+    System.debug('Summer Season');
+}
+Else If(Month >= 7)
+{
+    System.debug('Rainy Season');
+}
+Else
+{
+    System.debug('Winter Season');
+}
+}
+Else
+{
+    System.debug('Invalid Month');
+}
+------------------------------------------------------------------------------------
