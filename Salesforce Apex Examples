@@ -25,3 +25,45 @@ Else
     System.debug('Invalid Month');
 }
 ------------------------------------------------------------------------------------
+01)Programme for To Calculate Sum of all even numbers
+    
+Integer N = 10;
+Integer Sum = 0;
+
+For(Integer i = 0; i <= N; i++){
+    If(math.mod(i, 2) == 0){
+        Sum += i;
+        //System.debug(Sum);
+    }
+}
+    System.debug(Sum);
+---------------------------------------------------
+02)Programme for To Calculate Sum of all Multiples of 5 
+    
+integer N = 25;
+integer x = 5;
+integer sum = 0;
+
+for (integer i = 0; i <= N; i += x) {
+    if (math.mod(i, x) == 0) {
+        sum += i;
+    }
+}
+
+System.debug(sum);
+
+//System.debug(Sum);
+---------------------------------------------------
+03)Programme for To Calculate Sum of all odd numbers
+    
+    
+integer N = 10;
+integer sum = 0;
+
+for (integer i = 0; i <= N; i++) {
+    if (math.mod(i, 2) != 0) {
+        sum += i;
+    }
+}
+
+System.debug(sum);
