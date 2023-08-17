@@ -1,0 +1,59 @@
+//Greate 3 given number Greater or less --> expose the logic  ---> 3 numbers - 1 sring op
+public class ClassSecondExample 
+{
+    Public void main(String op, Integer Num1, Integer Num2, Integer Num3)
+    {
+        Cal(op,Num1,Num2,Num3);
+    }
+    
+    Void Cal(String op, Integer Num1, Integer Num2, Integer Num3) //Dont want to expose
+    {
+		IF(op == 'G')
+        {
+            CalGreater(Num1,Num2,Num3);
+        }
+        Else if(op =='S')
+        {
+			CalSmaller(Num1,Num2,Num3);
+        }
+        Else
+        {
+            System.debug('Invalid Operation');
+        }
+    }
+    
+    Void CalGreater(Integer Num1, Integer Num2, Integer Num3)
+    {
+     	If(Num1 > Num2 && Num1 > Num3)
+        {
+            System.debug('Num1 is greater, Value of Num1 is '+Num1);
+        }
+        Else if(Num2 > Num1 && Num2 > Num3)
+        {
+            System.debug('Num2 is greater, value of Num2 is '+Num2);
+        }
+        else
+        {
+            System.debug('Num3 is greater, Value of Num3 is '+Num3);
+        }
+    }
+    
+    Void CalSmaller(Integer Num1, Integer Num2, Integer Num3)
+    {
+        If(Num1 < Num2 && Num1 < Num3)
+        {
+            System.debug('Num1 is smaller, Value of Num1 is '+Num1);
+        }
+        Else if(Num2 <Num1 && Num2 < Num3)
+        {
+            System.debug('Num2 is smaller, Value of Num2 is '+Num2);
+        }
+        Else
+        {
+            System.debug('Num3 is smaller, Value of Num3 is '+Num3);
+        }
+        
+    }
+    
+    
+}
