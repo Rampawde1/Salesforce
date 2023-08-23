@@ -1,0 +1,49 @@
+Navigate to,Setup-Devloper Console-File-New-VF Page
+<apex:page controller="AdditionExample21Aug">
+    <apex:form>
+        <apex:pageblock title="Calculator"> 
+            <apex:pageBlockSection title="Addition Operation">
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Input First Number"></apex:outputLabel>
+                    <apex:inputText value="{!Num1}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Input Second Number"></apex:outputLabel>
+                    <apex:inputText value="{!Num2}"/>
+                </apex:pageBlockSectionItem>
+            
+                <apex:commandButton value="Addition" action="{!AdditionCal}"/>
+                
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Addition of 2 Numbers is-"></apex:outputLabel>
+                    <apex:outputText value="{!Addition}"></apex:outputText>
+                
+                </apex:pageBlockSectionItem>
+            
+            </apex:pageBlockSection>
+        
+        
+        
+        </apex:pageblock>
+    
+    </apex:form>
+    
+</apex:page>
+
+Navigate to 
+File-New-Apex Class
+public class AdditionExample21Aug 
+{
+    Public Integer Num1 {get;set;} 
+    Public Integer Num2 {get;set;} 
+    Public Integer Addition {get;set;}  
+    
+    Public void AdditionCal()
+    {
+        Addition = Num1 + Num2;
+    }
+    
+    
+
+}
