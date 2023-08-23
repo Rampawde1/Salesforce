@@ -1,3 +1,4 @@
+Connect VF Page to Apex Class----Addition Example
 Navigate to,Setup-Devloper Console-File-New-VF Page
 <apex:page controller="AdditionExample21Aug">
     <apex:form>
@@ -47,3 +48,94 @@ public class AdditionExample21Aug
     
 
 }
+----------------------------------------------------------------------------------------------------------------------------------
+Connect VF Page to Apex Class----Addition Substraction Multiplication Example
+public class AdditionExample21Aug 
+{
+    Public Integer Num1 {get;set;} 
+    Public Integer Num2 {get;set;} 
+    Public String Op {get;set;} 
+    Public Integer Result {get;set;} 
+    
+    Public Void SelectOpMethod()
+    {
+        IF(OP == 'A')
+        {
+           Addition();
+        }
+        Else IF(Op == 'S')
+        {
+            Substraction();
+        }
+        Else If(Op == 'M')
+        {
+            Multiplication();
+        }
+        Else
+        {
+            Result = 0;
+        }
+    }
+    
+    Void Addition()
+    {
+        Result = Num1 + Num2;
+    }
+    
+    Void Substraction()
+    {
+        Result = Num1 - Num2;
+    }
+    
+    Void Multiplication()
+    {
+        Result = Num1 * Num2;
+    }
+    
+    
+    
+    
+
+}
+
+VF Page
+
+<apex:page controller="AdditionExample21Aug">
+    <apex:form>
+        <apex:pageblock title="Calculator"> 
+            <apex:pageBlockSection title="Addition Operation">
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Input First Number"></apex:outputLabel>
+                    <apex:inputText value="{!Num1}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Input Second Number"></apex:outputLabel>
+                    <apex:inputText value="{!Num2}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:selectRadio label="Select the Operation" value="{!Op}">
+                    <apex:selectOption itemLabel="Addition" itemValue="A"></apex:selectOption>
+                    <apex:selectOption itemLabel="Substrction" itemValue="S"></apex:selectOption>
+                    <apex:selectOption itemLabel="Mutiplication" itemValue="M"></apex:selectOption>
+                
+                </apex:selectRadio>
+                
+            
+                <apex:commandButton value="Calculate" action="{!SelectOpMethod}"/>
+                
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Calculation is"></apex:outputLabel>
+                    <apex:outputText value="{!Result}"></apex:outputText>
+                
+                </apex:pageBlockSectionItem>
+            
+            </apex:pageBlockSection>
+        
+        
+        
+        </apex:pageblock>
+    
+    </apex:form>
+    
+</apex:page>
