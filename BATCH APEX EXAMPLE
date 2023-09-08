@@ -1,0 +1,27 @@
+public class Sept6thExample Implements Database.Batchable <SObject>
+{
+    Public Database.QueryLocator start(Database.BatchableContext CC)
+    {
+        String st = 'Select LastName, FirstName, MailingCity, fax, Phone from Contact';
+        return Database.getQueryLocator(st);
+    }
+    
+    Public Void Execute(Database.BatchableContext AA, List<Contact> AD)
+        // Get Batches from the Start  (5) ---> List --> Iterate --> Process the data 
+    {
+        
+        For(Contact EC : AD)
+        {
+            EC.MailingCity = 'Navi Mumbai';
+            Update EC;
+        }
+        
+    }
+    
+    Public Void Finish(Database.BatchableContext BB)
+        // Post Processing Operation 
+    {
+        System.debug('Batch is executed');
+        
+    }
+}
