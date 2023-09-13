@@ -25,3 +25,67 @@ public class Sept6thExample Implements Database.Batchable <SObject>
         
     }
 }
+---------------------------------------------------------------------------------------------------------------------------------
+8th September example
+---------------------->>>
+public class EmailClass8thSeot 
+{
+    Public Static void SendEmail()
+    {
+        // Step 1: Call Messaging Namespace
+        Messaging.SingleEmailMessage M = New Messaging.SingleEmailMessage();
+        
+        // Step 2: Form the List of Address 
+        List<String> Toadd = New List<string> {'shubhamgradx@gmail.com','rampawde93@gmail.com'};
+        List<String> ccadd = New List<String> {'Kalyaninandurkar728@gmail.com'};
+        List<String> bccadd = New List<string> {'dhargavepriti@gmail.com'};
+            
+        // Step 3: Compose Email 
+        M.setToAddresses(Toadd);
+        M.setCcAddresses(ccadd);
+        M.setBccAddresses(bccadd);
+        M.setSubject('The Apex Batch is sucessfully Updated the lead data');
+        M.setPlainTextBody('Hello, Your Batch apex task is executed sucessfully. You can visit SFDC Org and check.');
+        
+        // Step 4: Send Email
+        List<Messaging.Email> AllEmail = New List<Messaging.Email> ();
+        
+        AllEmail.add(M);
+        
+        Messaging.sendEmail(AllEmail);
+    }
+
+}
+
+
+public class EmailClass8thSeot 
+{
+    Public Static void SendEmail()
+    {
+        // Step 1: Call Messaging Namespace
+        Messaging.SingleEmailMessage M = New Messaging.SingleEmailMessage();
+        
+        // Step 2: Form the List of Address 
+        List<String> Toadd = New List<string> {'shubhamgradx@gmail.com','rampawde93@gmail.com'};
+        List<String> ccadd = New List<String> {'Kalyaninandurkar728@gmail.com'};
+        List<String> bccadd = New List<string> {'dhargavepriti@gmail.com'};
+            
+        // Step 3: Compose Email 
+        M.setToAddresses(Toadd);
+        M.setCcAddresses(ccadd);
+        M.setBccAddresses(bccadd);
+        M.setSubject('The Apex Batch is sucessfully Updated the lead data');
+        M.setPlainTextBody('Hello, Your Batch apex task is executed sucessfully. You can visit SFDC Org and check.');
+        
+        // Step 4: Send Email
+        List<Messaging.Email> AllEmail = New List<Messaging.Email> ();
+        
+        AllEmail.add(M);
+        
+        Messaging.sendEmail(AllEmail);
+    }
+
+}
+//Lets Execute from Anonymous Window
+Sept8thExample obj = New Sept8thExample();
+Database.executeBatch(obj);
