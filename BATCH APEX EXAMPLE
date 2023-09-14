@@ -89,3 +89,41 @@ public class EmailClass8thSeot
 //Lets Execute from Anonymous Window
 Sept8thExample obj = New Sept8thExample();
 Database.executeBatch(obj);
+---------------------------------------------------------------------------------------------------------------------------------
+11SEPTEMBER CLASS>>EMAIL EXAMPLE
+
+public class EmailClass11thSept 
+{
+    Public void SendEmail()
+    {   
+        //Step-01>>When you go to email & want to send email to someone the you 1st clk on COMPOSE so this is what below line is,
+        
+        Messaging.SingleEmailMessage SM = New Messaging.SingleEmailMessage();
+        
+        //Step-02>>From the list of BCC, CC and To
+        
+        List<String> ToAddresses = New List<String>{'rampawde93@gmail.com'};
+        List<String> CCAddresses = New List<String>{'deshmukhram25793@gmail.com'};
+        List<String> BccAddresses = New List<String>{'pawderam857@gmail.com'};
+            
+        String sub = 'This is the sub line of email sent from the class';
+        String PlainBody = 'This is the body part of email, I can write anything here...';
+        
+        //step 03>>Compose the Email
+        SM.SetToAddresses(ToAddresses);
+        SM.SetToAddresses(CCAddresses);
+        SM.SetToAddresses(BccAddresses);
+        SM.SetSubject(Sub);
+        SM.SetPlainTextBody(PlainBody);
+        
+        //Step 04>> Send Email
+        List<Messaging.Email> ME = New List<Messaging.Email>();
+        
+        ME.add(SM);
+        Messaging.SendEmail(ME);
+    }
+
+}
+>>>>>>>>LETS EXECUTE
+EmailClass11thSept A = New EmailClass11thSept();
+A.SendEmail();
