@@ -1,0 +1,21 @@
+public class ScheduleApexExample Implements Schedulable
+{
+    public void execute(SchedulableContext SC)
+    {
+        List<Task> AllTask = [Select Id, Subject, Priority, Status From Task];
+        For(Task EachTask:AllTask)
+        {
+            EachTask.Priority = 'High';
+            Update EachTask; 
+        }
+    }
+
+}
+lets Execute>>
+----------------
+String JName = 'Scheduling By Ram';
+String CRN  = '00 59 23 20 10 ? 2023';
+    //SS MM HH DD MM WW YYYY
+    //00 59 23 20 10 ? 2023
+ScheduleApexExample Obj = New ScheduleApexExample();
+System.schedule(JName, CRN, Obj);
