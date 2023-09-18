@@ -19,3 +19,28 @@ String CRN  = '00 59 23 20 10 ? 2023';
     //00 59 23 20 10 ? 2023
 ScheduleApexExample Obj = New ScheduleApexExample();
 System.schedule(JName, CRN, Obj);
+-------------------------------------------------------------------------------------------------------------------------------
+
+public class HappyNewYearSchedulableClasss Implements Schedulable
+{
+    Public Void Execute(SchedulableContext SC)
+    {
+        Messaging.SingleEmailMessage EM = New Messaging.SingleEmailMessage();
+        List<String> ToAdd = New List<String>{'rampawde93@gmail.com'};
+            
+            EM.setToAddresses(ToAdd);
+            EM.SetSubject('Happy New Year!!!');
+            EM.setPlainTextBody('Happy New Year to Ram...');
+            List<Messaging.Email> AllEmail = New List<Messaging.Email>();
+            AllEmail.add(EM);
+            Messaging.sendEmail(AllEmail);
+    }
+
+}
+lets Execute>>
+HappyNewYearSchedulableClasss Objj = New HappyNewYearSchedulableClasss();
+String JName = 'Happy New Year Email';
+String CRN = '59 59 23 31 12 ? 2023';
+//SS MM HH MM DD WW YYYY
+//'59 59 23 31 12 ? 2023'
+System.schedule(JName, CRN, Objj);
