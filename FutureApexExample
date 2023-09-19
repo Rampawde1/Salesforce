@@ -1,0 +1,62 @@
+Example>>01
+First lets see SERIEL PROCESSING example and then execute and analyse the outputs in logs
+public class FutureApexExample18thSept 
+{
+    Static void Method1()
+    {
+        System.debug('Inside Method 1 Line 1');
+        System.debug('Inside Method 1 Line 2');
+        System.debug('Inside Method 1 Line 3');
+    }
+    Static void Method2()
+    {
+        System.debug('Inside Method 2 Line 1');
+        System.debug('Inside Method 2 Line 2');
+        System.debug('Inside Method 2 Line 3');
+    }
+    Public Static void Method3()
+    {
+        System.debug('Inside Method 3 Line 1');
+        Method2();
+        System.debug('Inside Method 3 Line 2');
+        Method1();
+        System.debug('Inside Method 3 Line 3');
+    }
+
+}
+Lets Execute
+>>>>>>>>>>>>>
+FutureApexExample18thSept>Method3();
+---------------------------------------
+Example>>02
+By using Future Annotations @future in method 01 and 02 and then execute and see result in logs
+>>>>>>>>>>>>>
+public class FutureApexExample18thSept 
+{
+    @future
+    Static void Method1()
+    {
+        System.debug('Inside Method 1 Line 1');
+        System.debug('Inside Method 1 Line 2');
+        System.debug('Inside Method 1 Line 3');
+    }
+    @future
+    Static void Method2()
+    {
+        System.debug('Inside Method 2 Line 1');
+        System.debug('Inside Method 2 Line 2');
+        System.debug('Inside Method 2 Line 3');
+    }
+    Public Static void Method3()
+    {
+        System.debug('Inside Method 3 Line 1');
+        Method2();
+        System.debug('Inside Method 3 Line 2');
+        Method1();
+        System.debug('Inside Method 3 Line 3');
+    }
+
+}
+Lets Execute
+>>>>>>>>>>>>>
+FutureApexExample18thSept>Method3();
