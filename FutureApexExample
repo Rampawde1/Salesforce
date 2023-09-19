@@ -60,3 +60,35 @@ public class FutureApexExample18thSept
 Lets Execute
 >>>>>>>>>>>>>
 FutureApexExample18thSept>Method3();
+------------------------------------------------
+Example 03>>Make method 03 Non Static and Then Call
+public class FutureApexExample18thSept 
+{
+    @future
+    Static void Method1()
+    {
+        System.debug('Inside Method 1 Line 1');
+        System.debug('Inside Method 1 Line 2');
+        System.debug('Inside Method 1 Line 3');
+    }
+    @future
+    Static void Method2()
+    {
+        System.debug('Inside Method 2 Line 1');
+        System.debug('Inside Method 2 Line 2');
+        System.debug('Inside Method 2 Line 3');
+    }
+    Public void Method3()
+    {
+        System.debug('Inside Method 3 Line 1');
+        Method2();
+        System.debug('Inside Method 3 Line 2');
+        Method1();
+        System.debug('Inside Method 3 Line 3');
+    }
+
+}
+>>>>>
+Lets Execute
+FutureApexExample18thSept obj = New FutureApexExample18thSept();
+obj.Method3();
