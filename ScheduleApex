@@ -44,3 +44,46 @@ String CRN = '59 59 23 31 12 ? 2023';
 //SS MM HH MM DD WW YYYY
 //'59 59 23 31 12 ? 2023'
 System.schedule(JName, CRN, Objj);
+------------------------------------------------------------------------------------------------------------------------------
+Schedule Apex For All Emails
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+public class SchedulingEmailAllCon Implements Schedulable
+{
+    Public Void execute(SchedulableContext C)
+    {
+        List<Contact> AllCon = [Select Id, LastName,FirstName, Email From Contact];
+        
+        List<Messaging.Email> AllEmails = New List<Messaging.Email> ();
+        
+        For(Contact EachCon : AllCon)
+        {
+            IF(EachCon.Email != Null ) // Not Null --> value --> False
+            {
+                Messaging.SingleEmailMessage EM = New Messaging.SingleEmailMessage();
+                
+                String EachConEmail = EachCon.Email;
+                List<String> Toadd = New List<String> { EachConEmail };
+                String EmailSubject = 'Hello '+EachCon.FirstName+', Wishing You Happy New Year...';
+                String EmailBody = 'Dear '+EachCon.FirstName+', Whishing You and Your Family That is '+EachCon.LastName+' Family a Very Happy New Year';
+                
+                Em.SetSubject(EmailSubject);
+                Em.setPlainTextBody(EmailBody);
+                Em.setToAddresses(Toadd);
+                
+                AllEmails.add(Em);
+            }
+        }
+        
+        Messaging.sendEmail(AllEmails);
+        
+    }
+
+}
+Lets Execute
+>>>>>>>>>>>>>>>
+SchedulingEmailAllCon Obj = New SchedulingEmailAllCon();
+String JName = 'Send New Year Email By Ram';
+String CRN = '59 59 23 31 12 ? *';
+//SS MM HH DD MM WW YYYY
+//59 59 23 31 12 ? *
+System.Schedule(JName, CRN, Obj);
