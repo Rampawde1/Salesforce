@@ -1,0 +1,68 @@
+trigger TriggerExample22Sept on Account (before insert, before update, Before Delete) 
+{
+    IF(Trigger.IsInsert) 
+    {
+        TriggerExample22SeptHandler.SendEmailInsert();   //since below method is static method i.e why we call it "class name.method name"
+    }
+    Else IF(Trigger.IsUpdate )
+    {
+        TriggerExample22SeptHandler.SendEmailUpdate();
+    }
+    Else If(Trigger.IsDelete )
+    {
+       TriggerExample22SeptHandler.SendEmailDelete();
+    }
+        
+
+}
+//Now logics inside class
+
+public class TriggerExample22SeptHandler 
+{
+    Public Static void SendEmailInsert()
+    {
+        Messaging.SingleEmailMessage M = New Messaging.SingleEmailMessage();
+    
+        List<String> toAdd = New List<String> {'Shubhamgradx@gmail.com'};
+        M.setToAddresses(toAdd);
+        M.setSubject('One Account is created by shubham.. Please review');
+        M.setPlainTextBody('Hello We are getting this email after the trigger is executred');
+        
+        List<Messaging.Email> AllEmail = New List<Messaging.Email> ();
+        AllEmail.add(M);
+        Messaging.sendEmail(AllEmail);
+
+    }
+    
+    Public Static void SendEmailUpdate()
+    {
+        Messaging.SingleEmailMessage M = New Messaging.SingleEmailMessage();
+    
+        List<String> toAdd = New List<String> {'Shubhamgradx@gmail.com'};
+        M.setToAddresses(toAdd);
+        M.setSubject('One Account is Updated by shubham.. Please review');
+        M.setPlainTextBody('Hello We are getting this email after the trigger is executred');
+        
+        List<Messaging.Email> AllEmail = New List<Messaging.Email> ();
+        AllEmail.add(M);
+        Messaging.sendEmail(AllEmail);
+
+    }
+    
+    
+    Public Static void SendEmailDelete()
+    {
+        Messaging.SingleEmailMessage M = New Messaging.SingleEmailMessage();
+    
+        List<String> toAdd = New List<String> {'Shubhamgradx@gmail.com'};
+        M.setToAddresses(toAdd);
+        M.setSubject('One Account is Deleted by shubham.. Please review');
+        M.setPlainTextBody('Hello We are getting this email after the trigger is executred');
+        
+        List<Messaging.Email> AllEmail = New List<Messaging.Email> ();
+        AllEmail.add(M);
+        Messaging.sendEmail(AllEmail);
+
+    }
+
+}
