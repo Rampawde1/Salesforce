@@ -1,0 +1,41 @@
+public class RTIntegration12Oct 
+{
+    Public Static Void GetPostalDetails(String Searchh)
+    {
+        List<String> Names = New List<String>();
+        String EndPoint = 'https://api.postalpincode.in/pincode/'+Searchh;
+        
+        //Step:01>>Create Protocol
+        http P = New http();
+        
+        //Step:02>>Create Request
+        httpRequest r = New httpRequest();
+        
+        r.SetEndPoint(EndPoint);
+        r.SetMethod('GET');
+        
+        //Step:03>>Get Response(i.e Enter Button in Programming)
+        httpResponse response = p.send(r);
+        
+        //Now Whatever Response We Got We Have To Convert this response into String
+        String Body = Response.getBody();
+        
+        //Whatever response we got after 'Enter' we have to break this response
+        //Step:04>>Build a Logic and get your data
+        System.JSONParser jp = JSON.CreateParser(Body);
+        
+        While(JP.nextToken() != null)
+        {
+            if(jp.getText() == 'name')
+            {
+                jp.nextToken();
+                Names.add(jp.getText());
+            }
+        }
+        System.debug(Names);
+            
+        
+
+    }
+
+}
