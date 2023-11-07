@@ -1,0 +1,107 @@
+6.1) When the driving license number is updated, send an email alert to
+Contact. Email Example:
+Hi Eric,
+Your Toyota Innova Car License number MH14CS9977 was updated on 25/4/2017.
+Thank you,
+John Dow
+DMV Customer Service
+//Solution by using trigger,
+Trigger Handler Class>>>>>>>>>>>>>
+-----------------------------------
+public class TriggerHandelerClass {
+    public static void SendEmailUpdate(List<Contact_Object__c> updatedContacts) {
+        List<Messaging.SingleEmailMessage> allEmails = new List<Messaging.SingleEmailMessage>();
+        
+        Integer remainingEmails = Limits.getLimitEmailInvocations() - Limits.getEmailInvocations();
+        
+        for (Contact_Object__c contact : updatedContacts) {
+            if (remainingEmails > 0 && contact.Email__c != null) {
+                Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+                String emailSubject = 'Driving License Number Updated';
+                String emailBody = 'Hi ' + contact.First_Name__c + ', ' +
+                                   'Your Driving License Number ' + contact.Name + ' was updated on ' + Date.today();
+                
+                email.setSubject(emailSubject);
+                email.setPlainTextBody(emailBody);
+                email.setToAddresses(new List<String>{contact.Email__c});
+                
+                allEmails.add(email);
+                remainingEmails--;
+            }
+        }
+        
+        if (!allEmails.isEmpty()) {
+            Messaging.sendEmail(allEmails);
+        }
+    }
+
+}
+>>>>>>>>>>>>>>>>Trigger Inside we have called above trigger handler class>>>
+trigger DrivingLicenseNumber on Contact_Object__c (After update) {
+    List<Contact_Object__c> recordsToUpdate = new List<Contact_Object__c>();
+    
+    for (Contact_Object__c Ndata : Trigger.New) {
+        Contact_Object__c Odata = Trigger.oldMap.get(Ndata.Id);
+        
+        if (Ndata.Name != Odata.Name) {
+            recordsToUpdate.add(Ndata);
+        }
+    }
+
+    if (!recordsToUpdate.isEmpty() && Trigger.isUpdate) {
+        TriggerHandelerClass.SendEmailUpdate(recordsToUpdate);
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6.2)TRIGGER WHEN CAR COLOR BEING UPDATED
+TASK>>(When car color is updated:
+If Car Color = ‘Red’ – Car Category will be updated to ‘Mini’.
+If Car Color = ‘Blue – Car Category will be updated to ‘Manager’.
+If Car Color = ‘Yellow – Car Category will be updated to ‘Premium’.
+)
+>>
+trigger CarColorUpdated on Car_Object__c (before Update) 
+{
+    for(Car_Object__c NCLR:Trigger.New)
+    {
+        for(Car_Object__c OCLR:Trigger.Old);
+        {
+                if(NCLR.Color__c == 'Red')
+                {
+                 NCLR.Car_Category__c = 'Mini';
+                }
+                else if(NCLR.Color__c == 'Blue')
+                {
+                    NCLR.Car_Category__c = 'Manager';
+                }
+                else if(NCLR.Color__c == 'Yellow')
+                {
+                    NCLR.Car_Category__c = 'Premium';
+                }
+            }
+        }
+    }
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+6.3) Whenever a contact is updated:
+Update the field: “Number of Updated” by 1.
+>>>>>>>>>>>>>>
+trigger ContactObjUpdated on Contact_Object__c (before Update) {
+    for (Contact_Object__c oldContact : Trigger.old) {
+        Contact_Object__c newContact = Trigger.newMap.get(oldContact.Id);
+
+        if (newContact != null && oldContact != null) {
+            if (oldContact.Email__c != newContact.Email__c ||
+                oldContact.Name != newContact.Name ||
+                oldContact.Favourite_Color__c != newContact.Favourite_Color__c ||
+                oldContact.First_Name__c != newContact.First_Name__c ||
+                oldContact.Last_Name__c != newContact.Last_Name__c ||
+                oldContact.Mobile__c != newContact.Mobile__c) {
+                if (newContact.Number_of_Updates__c == null) {
+                    newContact.Number_of_Updates__c = 1;
+                } else {
+                    newContact.Number_of_Updates__c += 1;
+                }
+            }
+        }
+    }
+}
