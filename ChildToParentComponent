@@ -1,0 +1,159 @@
+//inside Child Component
+//1)Templet File
+
+<template>
+    <p>I am Child component</p>
+    <div class="vertical-menu">
+        <template for:each={navList} for:item="list">
+            <a href="javascript:void(0);" class={list.className} name={list.name} key={list.id}
+                onclick={handleNavSelection}>{list.name}</a>
+        </template>
+    </div>
+    
+</template>
+
+//2)JS file
+
+import { LightningElement, api } from 'lwc';
+
+export default class NavbarChildComponent extends LightningElement {
+    @api navList;
+    handleNavSelection(event) {
+        event.preventDefault();
+        const selectEvent = new CustomEvent('selection', {
+            detail: event.target.name
+        });
+        // Fire the custom event
+        this.dispatchEvent(selectEvent);
+    }
+}
+
+//3)<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>false</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+</LightningComponentBundle>
+
+
+//INSIDE PARENT COMPONENT
+//1)Inside HTML File
+<template>
+    <lightning-card title="Event with Data" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+    <h3>
+        select your favourite cricketer in child component and see details in
+        parent component
+    </h3>
+    <div class="flex">
+        <p>I am parent component</p>
+        <c-navbar-child-component nav-list={navList} onselection={selectedNavHandler}></c-navbar-child-component>
+
+        <template if:true={selectedPlayer}>
+            <div class="card">
+                <div>
+                    <img src={selectedPlayer.imgUrl} alt="Avatar" style="width:100%" />
+                </div>
+                <div class="container">
+                    <p><strong>Player Name:</strong> {selectedPlayer.name}</p>
+                    <p><strong>Ranking:</strong> {selectedPlayer.position}</p>
+                    <p><strong>country:</strong> {selectedPlayer.country}</p>
+                    <p><strong>Rating:</strong> {selectedPlayer.rating}</p>
+                </div>
+            </div>
+        </template>
+    </div>
+</div>
+</lightning-card>
+    
+</template>
+
+
+
+
+
+//2)Inside JS File
+import { LightningElement } from 'lwc';
+
+export default class NavbarParentComponent extends LightningElement {
+    //selectedPlayer: This property is used to store the details of the selected cricketer. Initially set to null
+    //navList: An array containing data about different cricketers, including their names, images, countries, rankings, ratings, etc
+    selectedPlayer = null;
+    navList = [
+        {
+            id: 1,
+            name: 'Virat Kohli',
+            imgUrl:
+                'https://www.cricbuzz.com/a/img/v1/152x152/i1/c170661/virat-kohli.jpg',
+            country: 'India',
+            rating: '922',
+            position: '1',
+            selected: false
+        },
+        {
+            id: 2,
+            name: 'Steven Smith',
+            imgUrl:
+                'https://www.cricbuzz.com/a/img/v1/152x152/i1/c170624/steven-smith.jpg',
+            country: 'Australia',
+            rating: '913',
+            position: '2',
+            selected: false
+        },
+        {
+            id: 3,
+            name: 'Kane Williamson',
+            imgUrl:
+                'https://www.cricbuzz.com/a/img/v1/152x152/i1/c170733/kane-williamson.jpg',
+            country: 'New Zealand',
+            rating: '887',
+            position: '3',
+            selected: false
+        },
+        {
+            id: 4,
+            name: 'Joe Root',
+            imgUrl:
+                'https://www.cricbuzz.com/a/img/v1/152x152/i1/c170942/joe-root.jpg',
+            country: 'England',
+            rating: '710',
+            position: '4',
+            selected: false
+        },
+        {
+            id: 5,
+            name: 'David Warner',
+            imgUrl:
+                'https://www.cricbuzz.com/a/img/v1/152x152/i1/c170635/david-warner.jpg',
+            country: 'Australia',
+            rating: '687',
+            position: '5',
+            selected: false
+        }
+    ];
+    //below method is called when the onselection event is fired by the child component
+    selectedNavHandler(event) {
+        const playerName = event.detail;
+        this.selectedPlayer = this.navList.find(
+            item => item.name === playerName
+        );
+    }
+}
+
+
+//3)inside xml file
+
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+</LightningComponentBundle>
