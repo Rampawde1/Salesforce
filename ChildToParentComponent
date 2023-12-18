@@ -4,12 +4,14 @@
 <template>
     <p>I am Child component</p>
     <div class="vertical-menu">
-        <template for:each={navList} for:item="list">
+        <template for:each={navList} for:item="list"> //NAVLIST IS THE ARRAY PRESENT INSIDE PARENT COMPONENT JS FILE
+//This template directive iterates over the navList array and generates the following markup for each item in the array.
+
             <a href="javascript:void(0);" class={list.className} name={list.name} key={list.id}
                 onclick={handleNavSelection}>{list.name}</a>
         </template>
     </div>
-    
+   //This div element is used to create a vertical menu. 
 </template>
 
 //2)JS file
